@@ -1,0 +1,17 @@
+name: translation_link_checker
+on:
+  push:
+    branches:
+      - "main"
+
+env:
+  REQUIREMENTS_PATH: "./.github/requirements.txt"
+  GITHUB: ${{ toJSON(github) }}
+
+jobs:
+  check-translation-link:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup_python_env
+      - run: python ./.github/actions-scripts/check_link.py
